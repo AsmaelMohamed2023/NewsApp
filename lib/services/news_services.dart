@@ -5,15 +5,16 @@ class NewsService {
   final Dio dio;
 
   NewsService(this.dio);
-  //مثال عن كل الاخبار العربية والمصرية من api
+
+  // مثال عن استرجاع كل الأخبار العربية والمصرية من API
   Future<List<ArticleModel>> getNews({required String category}) async {
-    //لطلب الريكوست
+    // لإرسال طلب الـ request
     try {
       Response response = await dio.get(
           'https://newsapi.org/v2/top-headlines?country=us&apiKey=4a698d2958594812a520f9dce1e3bd20&category=$category');
-      //لاستخراج الداتا من الريسبوني
+      // لاستخراج البيانات من الاستجابة
       Map<String, dynamic> jsonData = response.data;
-      //لاستخراج المقلات نفسها من api
+      // لاستخراج المقالات نفسها من API
       List<dynamic> articles = jsonData["articles"];
       List<ArticleModel> articlesList = [];
       for (var article in articles) {
